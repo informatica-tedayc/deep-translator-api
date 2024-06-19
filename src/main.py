@@ -37,6 +37,7 @@ from src.models.responses import TranslationResponse
 from src.utils import get_translation, get_summary
 from src.metadata import title, description, contact, license_info
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 import uvicorn
 
@@ -63,6 +64,14 @@ app = FastAPI(
     description=description,
     contact=contact,
     license_info=license_info,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow any origin
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all methods
+    allow_headers=["*"],  # Allow all headers
 )
 
 
